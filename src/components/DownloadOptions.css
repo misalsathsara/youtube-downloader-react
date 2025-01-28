@@ -1,0 +1,22 @@
+.download-options {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.download-button {
+    display: block;
+    padding: 12px;
+    background: #3a3a50;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.download-button:hover {
+    background: #007bff;
+}
