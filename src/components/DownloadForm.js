@@ -3,29 +3,30 @@ import React, { useState } from 'react';
 import './DownloadForm.css';
 
 const DownloadForm = ({ onFormSubmit }) => {
-  const [videoUrl, setVideoUrl] = useState('');
+  const [url, setUrl] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add validation
-    if (typeof onFormSubmit === 'function') {
-      onFormSubmit(videoUrl.trim());
-    } else {
-      console.error('No submit handler found');
+    if (url) {
+      onFormSubmit(url);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="download-form">
-      <input
-        type="url"
-        value={videoUrl}
-        onChange={(e) => setVideoUrl(e.target.value)}
-        placeholder="Paste YouTube URL here"
-        pattern="^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+"
-        required
-      />
-      <button type="submit">Show Download Options</button>
+    <form className="download-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="url">Enter YouTube Video URL:</label>
+        <input
+          type="url"
+          id="url"
+          name="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          required
+          placeholder="Paste URL here"
+        />
+      </div>
+      <button type="submit" className="btn-submit">Download</button>
     </form>
   );
 };

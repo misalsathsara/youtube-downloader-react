@@ -3,18 +3,18 @@ import React from 'react';
 import './Header.css';
 
 const Header = () => {
-  return (
-    <header className="header">
-      <div className="logo">
-        <h1>QuickTube</h1>
-      </div>
-      <nav className="nav">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-      </nav>
-    </header>
-  );
+    return (
+        <header className="header">
+            <div className="logo">YouTube Downloader</div>
+            <nav>
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/features">Features</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+    );
 };
 
 export default Header;

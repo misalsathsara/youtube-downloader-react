@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useState } from 'react';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -39,7 +40,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <main>
+      <main className="main-content">
         <DownloadForm onFormSubmit={handleDownloadSubmit} />
         {loading && <p className="loading">Fetching available formats...</p>}
         {error && <p className="error">{error}</p>}

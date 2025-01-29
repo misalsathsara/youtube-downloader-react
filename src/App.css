@@ -1,23 +1,46 @@
+/* src/App.css */
+
+/* Ensure body and html take full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Make the root container (App) a flex column layout */
 .App {
-  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  /* Ensure the App takes the full height of the viewport */
+}
+
+/* Main content takes available space */
+.main-content {
+  flex-grow: 1; /* Takes up all available space between header and footer */
+  padding: 20px;
+}
+
+/* Styling for footer */
+footer {
+  background-color: #333;
+  color: white;
   text-align: center;
-  background: #f4f4f4;
-  min-height: 100vh;
-  padding: 30px;
+  padding: 20px;
 }
 
-.error {
-  color: #d9534f;
-  background: #f8d7da;
-  padding: 10px;
-  margin-top: 15px;
-  border-radius: 5px;
-  display: inline-block;
+/* Optional: Adding specific footer style */
+footer .social-icons {
+  display: flex;
+  justify-content: center;
 }
 
-.loading {
-  font-size: 16px;
-  font-weight: bold;
-  color: #007bff;
-  margin-top: 15px;
+footer .social-icons a {
+  margin: 0 10px;
+  font-size: 1.5rem;
+  color: white;
+  text-decoration: none;
 }
+
+footer .social-icons a:hover {
+  opacity: 0.8;
+}
+
