@@ -1,0 +1,25 @@
+/* src/components/Footer/Footer.css */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #282c34;
+    color: white;
+    width: 100%; /* Ensure the footer spans the full width */
+    box-sizing: border-box; /* Include padding in the width calculation */
+  }
+  
+  .footer p {
+    margin: 0;
+  }
+  
+  .footer-nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+  }
+  
+  .footer-nav a:hover {
+    text-decoration: underline;
+  }

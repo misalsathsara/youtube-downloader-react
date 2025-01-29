@@ -1,44 +1,53 @@
 import React, { useState } from 'react';
-import Header from './components/Header';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import DownloadForm from './components/DownloadForm';
 import DownloadOptions from './components/DownloadOptions';
-import Footer from './components/Footer';
 import './App.css';
 
-const App = () => {
-    const [formats, setFormats] = useState([]);
+function App() {
+  const [formats, setFormats] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-    const handleFormSubmit = async (videoUrl) => {
-        try {
-            const response = await fetch('http://127.0.0.1:5000/download', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url: videoUrl })
-            });
+  const handleDownloadSubmit = async (url) => {
+    setLoading(true);
+    setError('');
+    setFormats([]);
 
-            const data = await response.json();
-            if (data.error) {
-                alert(data.error);
-                return;
-            }
+    try {
+      const response = await fetch('http://127.0.0.1:5000/download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url }),
+      });
 
-            setFormats(data.formats);
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again.');
-        }
-    };
+      const data = await response.json();
 
-    return (
-        <div className="App">
-            <Header />
-            <div className="container">
-                <DownloadForm onFormSubmit={handleFormSubmit} />
-                <DownloadOptions formats={formats} />
-            </div>
-            <Footer />
-        </div>
-    );
-};
+      if (response.ok) {
+        setFormats(data.formats);
+      } else {
+        throw new Error(data.error || 'Failed to fetch formats');
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="App">
+      <Header />
+      <main>
+        <DownloadForm onFormSubmit={handleDownloadSubmit} />
+        {loading && <p className="loading">Fetching available formats...</p>}
+        {error && <p className="error">{error}</p>}
+        {formats.length > 0 && <DownloadOptions formats={formats} />}
+      </main>
+      <Footer />
+    </div>
+  );
+}
 
 export default App;
