@@ -1,46 +1,113 @@
-/* src/App.css */
-
-/* Ensure body and html take full height */
-html, body {
-  height: 100%;
+/* App.css */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Make the root container (App) a flex column layout */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #1c1c1c; /* Dark background */
+  color: #ddd; /* Light text color */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;  /* Ensure the App takes the full height of the viewport */
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
 }
 
-/* Main content takes available space */
-.main-content {
-  flex-grow: 1; /* Takes up all available space between header and footer */
-  padding: 20px;
-}
-
-/* Styling for footer */
-footer {
-  background-color: #333;
-  color: white;
+header {
+  background-color: #333; /* Dark header */
+  color: #fff;
+  width: 100%;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: center;
-  padding: 20px;
 }
 
-/* Optional: Adding specific footer style */
-footer .social-icons {
-  display: flex;
-  justify-content: center;
+footer {
+  background-color: #333; /* Dark footer */
+  color: #fff;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
 }
 
-footer .social-icons a {
-  margin: 0 10px;
-  font-size: 1.5rem;
-  color: white;
+main {
+  width: 100%;
+  max-width: 800px;
+  background-color: #2a2a2a; /* Dark content area */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 80px; /* Add space for sticky header */
+  margin-bottom: 80px; /* Add space for fixed footer */
+}
+
+h1, h2, h3 {
+  color: #fff;
+}
+
+input[type="text"],
+button {
+  font-size: 16px;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+}
+
+input[type="text"] {
+  width: 100%;
+  max-width: 500px;
+  background-color: #3c3c3c;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  background-color: #555;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  background-color: #555;
+}
+
+.loading,
+.error {
+  color: #ff6347;
+  font-size: 18px;
+}
+
+a {
   text-decoration: none;
+  color: #007bff;
 }
 
-footer .social-icons a:hover {
-  opacity: 0.8;
+a:hover {
+  color: #0056b3;
 }
-

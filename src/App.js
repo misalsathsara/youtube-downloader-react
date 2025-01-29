@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -26,7 +25,7 @@ function App() {
       const data = await response.json();
 
       if (response.ok) {
-        setFormats(data.formats);
+        setFormats(data.formats); // Set all formats received from backend
       } else {
         throw new Error(data.error || 'Failed to fetch formats');
       }
@@ -40,7 +39,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <main className="main-content">
+      <main>
         <DownloadForm onFormSubmit={handleDownloadSubmit} />
         {loading && <p className="loading">Fetching available formats...</p>}
         {error && <p className="error">{error}</p>}
