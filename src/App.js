@@ -1,53 +1,62 @@
-import React, { useState } from 'react';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import DownloadForm from './components/DownloadForm';
-import DownloadOptions from './components/DownloadOptions';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
 
-function App() {
-  const [formats, setFormats] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+const App = () => {
+  const [url, setUrl] = useState("");
+  const [videoInfo, setVideoInfo] = useState(null);
+  const [error, setError] = useState("");
 
-  const handleDownloadSubmit = async (url) => {
-    setLoading(true);
-    setError('');
-    setFormats([]);
+  const fetchVideoDetails = async () => {
+    setError("");
+    setVideoInfo(null);
+
+    if (!url.trim()) {
+      setError("Please enter a YouTube URL.");
+      return;
+    }
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/download', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setFormats(data.formats); // Set all formats received from backend
-      } else {
-        throw new Error(data.error || 'Failed to fetch formats');
-      }
+      const response = await axios.post("http://127.0.0.1:5000/download", { url });
+      setVideoInfo(response.data);
     } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+      setError("Failed to fetch video details. Please try again.");
     }
   };
 
   return (
-    <div className="App">
-      <Header />
-      <main>
-        <DownloadForm onFormSubmit={handleDownloadSubmit} />
-        {loading && <p className="loading">Fetching available formats...</p>}
-        {error && <p className="error">{error}</p>}
-        {formats.length > 0 && <DownloadOptions formats={formats} />}
-      </main>
-      <Footer />
+    <div style={{ textAlign: "center", padding: "20px", backgroundColor: "#121212", color: "white", minHeight: "100vh" }}>
+      <h2>YouTube Video Downloader</h2>
+      <input
+        type="text"
+        placeholder="Enter YouTube URL"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        style={{ padding: "10px", width: "60%", marginBottom: "10px" }}
+      />
+      <button onClick={fetchVideoDetails} style={{ padding: "10px 20px", marginLeft: "10px", cursor: "pointer" }}>
+        Get Video
+      </button>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {videoInfo && (
+        <div style={{ marginTop: "20px", padding: "20px", backgroundColor: "#222", borderRadius: "10px" }}>
+          <h3>{videoInfo.title}</h3>
+          <img src={videoInfo.thumbnail} alt="Thumbnail" style={{ width: "200px", borderRadius: "10px" }} />
+          <h4>Available Formats:</h4>
+          <ul>
+            {videoInfo.formats.map((format, index) => (
+              <li key={index}>
+                <a href={format.url} target="_blank" rel="noopener noreferrer" style={{ color: "cyan" }}>
+                  Download {format.resolution}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;

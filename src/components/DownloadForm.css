@@ -1,24 +1,21 @@
-/* DownloadForm.css */
+.download-container {
+  text-align: center;
+  padding: 30px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 800px;
+  margin: 80px auto;
+}
+
 .download-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-color: #3a3a3a;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  max-width: 600px;
-  margin: 20px auto;
 }
 
-.download-form h2 {
-  font-size: 24px;
-  color: #fff;
-  margin-bottom: 20px;
-}
-
-.download-form input {
+input[type="text"] {
   font-size: 16px;
   padding: 12px;
   width: 100%;
@@ -26,16 +23,11 @@
   margin: 10px 0;
   border-radius: 5px;
   border: none;
-  background-color: #555;
+  background-color: #3c3c3c;
   color: #fff;
-  transition: background-color 0.3s ease;
 }
 
-.download-form input:focus {
-  background-color: #666;
-}
-
-.download-form button {
+button {
   padding: 12px;
   font-size: 16px;
   background-color: #007bff;
@@ -43,9 +35,47 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.download-form button:hover {
+button:hover {
+  background-color: #0056b3;
+}
+
+.video-info {
+  margin-top: 20px;
+  background-color: #3a3a3a;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.video-info img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+}
+
+.video-info h3, .video-info h4 {
+  color: #fff;
+}
+
+.video-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.video-info ul li {
+  margin: 10px 0;
+}
+
+.video-info ul li a {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.video-info ul li a:hover {
   background-color: #0056b3;
 }
