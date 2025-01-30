@@ -23,21 +23,17 @@ def get_video_info():
             'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',  # Custom user agent
             'referer': 'https://www.youtube.com/',  # Add referrer to mimic browser requests
             'merge_output_format': 'mp4',  # Ensure the output is in MP4 format
+            'outtmpl': 'downloads/%(id)s.%(ext)s',  # Save video with ID as the file name
             'force-ipv4': True,  # Optionally, force IPv4 if IPv6 is an issue
+            'noplaylist': True,  # Disable playlist downloads
             'hls_prefer_native': True,  # Prefer native formats over HLS
             'prefer_free_formats': True,  # Prefer free formats over paid ones
-            'outtmpl': 'downloads/%(id)s.%(ext)s',  # Save video with ID as the file name
-            'postprocessors': [
-                {
-                    'key': 'FFmpegVideoConvertor',  # Use FFmpeg to merge video and audio
-                }
-            ]
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             # Try extracting information
             try:
-                info = ydl.extract_info(video_url, download=True)  # Set download=True to download video and audio
+                info = ydl.extract_info(video_url, download=False)  # Set download=False to just fetch details
             except Exception as e:
                 print(f"yt-dlp error: {str(e)}")  # Log yt-dlp specific error
                 return jsonify({"error": f"yt-dlp failed: {str(e)}"}), 500
